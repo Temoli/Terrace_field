@@ -2,8 +2,8 @@
 
 A simple script that I wrote while working at OBI - a home improvement store
 
-As an input, it takes a few parameters:
-  - product ID that was chosen by client
+As an input it takes a few parameters:
+  - product ID of a product that was chosen by a client
   - measurements (in several variants) of a terrace which client wants to renovate
 
 And it returns how many e.g. planks or paver blocks client has to buy, and costs of mentioned materials
