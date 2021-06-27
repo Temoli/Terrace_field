@@ -17,7 +17,7 @@ def read_proportions(proportion):
     prop_2 = ''
     location = proportion.find(':')
     for i in proportion:
-        if licz < location
+        if licz < location:
             prop_1 = prop_1 + i
         if licz > location:
             prop_2 = prop_2 + i
@@ -56,114 +56,114 @@ def calculate_with_losses(terrace_l, terrace_w, plank_l, plank_w):
 
 while True:
     print('''v 0.8.1
-
-    DŁUGOŚCI PODAWAĆ W  M E T R A C H
+    
+    All dimensions in M E T E R S
 
     ''')
-    kod_prod = input('Podaj kod produktu lub przejdź dalej. ').replace(',','.')
-    dlu = float(input('Podaj długość płytki/deski. ').replace(',','.'))
-    szer = float(input('Podaj szerokość płytki/deskideski. ').replace(',','.'))
-    area_p = area(dlu, szer)
-    print('\nPole płytki/deski to: ' + str(round(area_p, 2)) + ' m^2\n')
-    nadmiar = input('Czy nadmiarowy materiał będzie wykorzystywany? (T)ak / (N)ie\n').lower()
+    product_id = input('Enter the product code or continue.  ').replace(',','.')
+    length = float(input('Enter the length of the tile / plank. ').replace(',','.'))
+    width  = float(input('Enter the width of the tile / board. ').replace(',','.'))
+    area_p = area(length , width )
+    print('\nThe tile / plank area is: ' + str(round(area_p, 2)) + ' m^2\n')
+    excess = input('Will the excess material be used?  (Y)es / (N)o\n').lower()
 
-    print('''\nCo jest wiadome o miejscu?
-1 - Samo area.
-2 - Wymary.
-3 - Pole z proporcjami.
-4 - Pole i jeden bok.\n''')
-    co_liczone = int(input('Podaj numer. '))
+    print('''\nWhat is known about the terrace? 
+1 - Just a field.
+2 - Dimensions.
+3 - Field with proportions.
+4 - Area and one dimension.\n''')
+    what_calculated = int(input('Enter the number. '))
 
-    if co_liczone == 1:
-        print('\nZ podanych danych  nie jest możliwe wyliczenie ilości potrzebnych obrzeży.\n')
-        area_m = float(input('Podaj area miejsca. ').replace(',','.'))
-        ilosc_plytek = area_m / area_p
-        print('\nPotrzeba: ' + str(math.ceil(ilosc_plytek)) + ' płytek/desek')
-        cena = calculate_price(kod_prod)
-        print('Cena jednostkowa: ' + str(cena) + ' zł. Całość kosztować będzie: ' + str(cena * math.ceil(ilosc_plytek)) +' zł.')
-        if koniec() == 1: break
+    if what_calculated == 1:
+        print('\nIt is not possible to calculate the number of finishing strips needed from the given data.\n')
+        area_m = float(input('Enter the area of the terrace. ').replace(',','.'))
+        tiles_number = area_m / area_p
+        print('\nNeed: ' + str(math.ceil(tiles_number)) + ' tiles / planks.')
+        price = calculate_price(product_id)
+        print('Unit price: ' + str(price) + ' zł. The entire cost will be: ' + str(price * math.ceil(tiles_number)) +' zł.')
+        if end() == 1: break
 
-    if co_liczone == 2:
-        if nadmiar == 't':
-            dlugosc_m = float(input('\nPodaj długość miejsca. ').replace(',','.'))
-            szerokosc_m = float(input('Podaj szerokość miejsca. ').replace(',','.'))
-            ilosc_plytek = area(dlugosc_m, szerokosc_m) / area_p
-            obwod = dlugosc_m * 2 + szerokosc_m * 2
-            print('\nPole miejsca to: ' + str(round(area(dlugosc_m, szerokosc_m), 2)) + ' m^2. Potrzeba: ' + str(math.ceil(ilosc_plytek)) + ' płytek/desek oraz ' + str(round(obwod, 2)) + ' metrów obrzeży.')
-            cena = calculate_price(kod_prod)
-            print('Cena jednostkowa: ' + str(cena) + ' zł. Całość kosztować będzie: ' + str(cena * math.ceil(ilosc_plytek)) +' zł.')
-            if koniec() == 1: break
+    if what_calculated == 2:
+        if excess == 'y':
+            length_m = float(input('\nEnter the length of the terrace. ').replace(',','.'))
+            width_m = float(input('Enter the width of the terrace. ').replace(',','.'))
+            tiles_number = area(length_m, width_m) / area_p
+            perimeter = length_m * 2 + width_m * 2
+            print('\nThe terrace area is: ' + str(round(area(length_m, width_m), 2)) + ' m^2. ' + str(math.ceil(tiles_number)) + ' planks / tiles are needed and ' + str(round(perimeter, 2)) + ' finishing strips.')
+            price = calculate_price(product_id)
+            print('Unit price: ' + str(price) + ' zł. The entire cost will be: ' + str(price * math.ceil(tiles_number)) +' zł.')
+            if end() == 1: break
         else:
-            dlugosc_m = float(input('\nPodaj długość miejsca. ').replace(',','.'))
-            szerokosc_m = float(input('Podaj szerokość miejsca. ').replace(',','.'))
-            obwod = dlugosc_m * 2 + szerokosc_m * 2
-            il_war_1, il_war_2 = calculate_with_losses(dlugosc_m, szerokosc_m, dlu, szer)
-            cena = calculate_price(kod_prod)
-            cena_1 = il_war_1 * cena
-            print('\nCena produktu: ' + str(cena) + ' zł.')
-            print('\nW pierwszym warciancie potrzeba: ' + str(il_war_1) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_1, 2)) + ' zł.')
-            cena_2 = il_war_2 * cena
-            print('\nW drugim warciancie potrzeba: ' + str(il_war_2) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_2, 2)) + ' zł.')
-            print('\nBędzie też potrzeba ' + str(round(obwod, 2)) + ' obrzeży.')
-            if koniec() == 1: break
+            length_m = float(input('\nEnter the length of the terrace. ').replace(',','.'))
+            width_m = float(input('Enter the width of the terrace. ').replace(',','.'))
+            perimeter = length_m * 2 + width_m * 2
+            value_1, value_2 = calculate_with_losses(lengthm, width_m, length, width)
+            price = calculate_price(product_id)
+            price_1 = value_1 * price
+            print('\nProduct price: ' + str(price) + ' zł.')
+            print('\nIn the first variant, you will need: ' + str(value_1) + ' tiles / planks.')
+            print('It will cost: ' + str(round(price_1, 2)) + ' zł.')
+            price_2 = value_2 * price
+            print('\nIn the second variant, you will need: ' + str(value_2) + ' płytek/desek.')
+            print('It will cost: ' + str(round(price_2, 2)) + ' zł.')
+            print('\nYou will also need ' + str(round(perimeter, 2)) + ' finishing strips.')
+            if end() == 1: break
 
-    if co_liczone == 3:
-        if nadmiar == 't':
-            area_m = float(input('\nPodaj area miejsca. ').replace(',','.'))
-            prop = input('Podaj proporcje boków miejsca w postaci "x:y". ').replace(',','.')
+    if what_calculated == 3:
+        if excess == 'y':
+            area_m = float(input('\nEnter the area of the terrace. ').replace(',','.'))
+            prop = input('Enter the proportions of the sides of the terrace in the form "x: y". ').replace(',','.')
             prop_x, prop_y = read_proportions(prop)
-            dlugosc_m, szerokosc_m = sides_from_proportions(prop_x, prop_y, area_m)
-            obwod = dlugosc_m * 2 + szerokosc_m * 2
-            ilosc_plytek = area_m / area_p
-            print('\nWymiary miejsca to: ' + str(round(dlugosc_m, 2)) + ' na ' + str(round(szerokosc_m, 2)) + 'm. Potrzeba: ' + str(math.ceil(ilosc_plytek)) + ' płytek/desek oraz ' + str(round(obwod, 2)) + ' metrów obrzeży.')
-            cena = calculate_price(kod_prod)
-            print('Cena jednostkowa: ' + str(cena) + ' zł. Całość kosztować będzie: ' + str(cena * math.ceil(ilosc_plytek)) +' zł.')
-            if koniec() == 1: break
+            length_m, width_m = sides_from_proportions(prop_x, prop_y, area_m)
+            perimeter = length_m * 2 + width_m * 2
+            tiles_number = area_m / area_p
+            print('\nThe dimensions of the terrace are: ' + str(round(length_m, 2)) + ' by ' + str(round(width_m, 2)) + 'm. ' + str(math.ceil(tiles_number)) + ' planks / tiles are needed and ' + str(round(perimeter, 2)) + ' finishing strips.')
+            price = calculate_price(product_id)
+            print('Unit price: ' + str(price) + ' zł. The entire cost will be: ' + str(price * math.ceil(tiles_number)) +' zł.')
+            if end() == 1: break
         else:
-            area_m = float(input('\nPodaj area miejsca. ').replace(',','.'))
-            prop = input('Podaj proporcje boków miejsca w postaci "x:y". ').replace(',','.')
+            area_m = float(input('\nEnter the area of the terrace. ').replace(',','.'))
+            prop = input('Enter the proportions of the sides of the terrace in the form "x: y". ').replace(',','.')
             prop_x, prop_y = read_proportions(prop)
-            dlugosc_m, szerokosc_m = sides_from_proportions(prop_x, prop_y, area_m)
-            obwod = dlugosc_m * 2 + szerokosc_m * 2
-            il_war_1, il_war_2 = calculate_with_losses(dlugosc_m, szerokosc_m, dlu, szer)
-            cena = calculate_price(kod_prod)
-            cena_1 = il_war_1 * cena
-            print('\nWymiary miejsca to: ' + str(round(dlugosc_m, 2)) + ' na ' + str(round(szerokosc_m, 2)) + 'm.')
-            print('\nCena produktu: ' + str(cena) + ' zł.')
-            print('\nW pierwszym warciancie potrzeba: ' + str(il_war_1) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_1, 2)) + ' zł.')
-            cena_2 = il_war_2 * cena
-            print('\nW drugim warciancie potrzeba: ' + str(il_war_2) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_2, 2)) + ' zł.')
-            print('\nBędzie też potrzeba ' + str(round(obwod, 2)) + ' obrzeży.')
-            if koniec() == 1: break
+            length_m, width_m = sides_from_proportions(prop_x, prop_y, area_m)
+            perimeter = length_m * 2 + width_m * 2
+            value_1, value_2 = calculate_with_losses(length_m, width_m, length, width)
+            price = calculate_price(product_id)
+            price_1 = value_1 * price
+            print('\nThe dimensions of the terrace are: ' + str(round(length_m, 2)) + ' by ' + str(round(width_m, 2)) + 'm.')
+            print('\nProduct price: ' + str(price) + ' zł.')
+            print('\nIn the first variant, you will need: ' + str(value_1) + ' tiles / planks.')
+            print('It will cost: ' + str(round(price_1, 2)) + ' zł.')
+            price_2 = value_2 * price
+            print('\nIn the second variant, you will need: ' + str(value_2) + ' tiles / planks.')
+            print('It will cost: ' + str(round(price_2, 2)) + ' zł.')
+            print('\nYou will also need ' + str(round(perimeter, 2)) + ' finishing strips.')
+            if end() == 1: break
 
-    if co_liczone == 4:
-        if nadmiar == 't':
-            area_m = float(input('\nPodaj area miejsca. ').replace(',','.'))
-            bok_a = int(input('Podaj w metrach długość jednego z boków miejsca. ').replace(',','.'))
-            bok_b = side_from_field(bok_a, area_m)
-            obwod = bok_a * 2 + bok_b * 2
-            ilosc_plytek = area_m / area_p
-            print('\nWymiary miejsca to: ' + str(round(bok_a, 2)) + ' na ' + str(round(bok_b, 2)) + 'm. Potrzeba: ' + str(math.ceil(ilosc_plytek)) + ' płytek/desek oraz ' + str(round(obwod, 2)) + ' metrów obrzeży.')
-            cena = calculate_price(kod_prod)
-            print('Cena jednostkowa: ' + str(cena) + ' zł. Całość kosztować będzie: ' + str(cena * math.ceil(ilosc_plytek)) +' zł.')
-            if koniec() == 1: break
+    if what_calculated == 4:
+        if excess == 'y':
+            area_m = float(input('\nEnter the area of the terrace. ').replace(',','.'))
+            side_a = int(input('Enter the length of one side of the terrace. ').replace(',','.'))
+            side_b = side_from_field(side_a, area_m)
+            perimeter = side_a * 2 + side_b * 2
+            tiles_number = area_m / area_p
+            print('\nThe dimensions of the terrace are: ' + str(round(side_a, 2)) + ' by ' + str(round(side_b, 2)) + 'm. ' + str(math.ceil(tiles_number)) + ' planks / tiles are needed and ' + str(round(perimeter, 2)) + ' finishing strips.')
+            price = calculate_price(product_id)
+            print('Unit price: ' + str(price) + ' zł. The entire cost will be: ' + str(price * math.ceil(tiles_number)) +' zł.')
+            if end() == 1: break
         else:
-            area_m = float(input('\nPodaj area miejsca. ').replace(',','.'))
-            dlugosc_m = int(input('Podaj w metrach długość jednego z boków miejsca. ').replace(',','.'))
-            szerokosc_m = side_from_field(dlugosc_m, area_m)
-            obwod = dlugosc_m * 2 + szerokosc_m * 2
-            il_war_1, il_war_2 = calculate_with_losses(dlugosc_m, szerokosc_m, dlu, szer)
-            cena = calculate_price(kod_prod)
-            cena_1 = il_war_1 * cena
-            print('\nCena produktu: ' + str(cena) + ' zł.')
-            print('\nW pierwszym warciancie potrzeba: ' + str(il_war_1) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_1, 2)) + ' zł.')
-            cena_2 = il_war_2 * cena
-            print('\nW drugim warciancie potrzeba: ' + str(il_war_2) + ' płytek/desek.')
-            print('Kosztować to będzie: ' + str(round(cena_2, 2)) + ' zł.')
-            print('\nBędzie też potrzeba ' + str(round(obwod, 2)) + ' obrzeży.')
-            if koniec() == 1: break
+            area_m = float(input('\nEnter the area of the terrace. ').replace(',','.'))
+            length_m = int(input('Enter the length of one side of the terrace. ').replace(',','.'))
+            width_m = side_from_field(length_m, area_m)
+            perimeter = length_m * 2 + width_m * 2
+            value_1, value_2 = calculate_with_losses(length_m, width_m, length, width)
+            price = calculate_price(product_id)
+            price_1 = value_1 * price
+            print('\nProduct price: ' + str(price) + ' zł.')
+            print('\nIn the first variant, you will need: ' + str(value_1) + ' płytek/desek.')
+            print('It will cost: ' + str(round(price_1, 2)) + ' zł.')
+            price_2 = value_2 * price
+            print('\nIn the second variant, you will need: ' + str(value_2) + ' płytek/desek.')
+            print('It will cost: ' + str(round(price_2, 2)) + ' zł.')
+            print('\nYou will also need ' + str(round(perimeter, 2)) + ' finishing strips.')
+            if end() == 1: break
