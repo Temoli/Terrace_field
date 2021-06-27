@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import math
 import requests
 from bs4 import BeautifulSoup
