@@ -17,7 +17,7 @@ def read_proportions(proportion):
     prop_2 = ''
     location = proportion.find(':')
     for i in proportion:
-        if licz < location
+        if licz < location:
             prop_1 = prop_1 + i
         if licz > location:
             prop_2 = prop_2 + i
